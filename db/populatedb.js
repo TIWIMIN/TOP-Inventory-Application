@@ -1,5 +1,8 @@
 import pg from "pg";
 
+const roleName = process.env.ROLE_NAME; 
+const rolePassword = process.env.ROLE_PASSWORD; 
+
 const { Client } = pg;
 
 const categories = [
@@ -25,7 +28,7 @@ CREATE TABLE IF NOT EXISTS items (
 
 async function main() {
   const client = new Client({
-    connectionString: "postgresql://<role_name>:<role_password>@localhost:5432/top_users",
+    connectionString: `postgresql://${role_name}:${role_password}@localhost:5432/top_inventory`,
   });
 
   try {

@@ -1,10 +1,8 @@
-import express from "express"; 
+import express from "express";
+import { createIndexGet } from "../controllers/indexControllers.js";
 
-const router = express.Router(); 
+const router = express.Router();
 
-router.route("/")
-    .get((req, res) => {
-        res.render("index"); 
-    }); 
+router.route("/").get(createIndexGet);
 
-export default router; 
+export default router;
