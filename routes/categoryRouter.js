@@ -1,5 +1,8 @@
-import express from "express"; 
+import express from "express";
+import { createCategoryGet } from "../controllers/categoryController.js";
 
-const router = express.Router(); 
+const router = express.Router();
 
-export default router; 
+router.route("/:categoryName").get(createCategoryGet);
+
+export default router;
