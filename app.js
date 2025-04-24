@@ -3,6 +3,7 @@ import path from "path";
 import url from "url";
 
 import indexRouter from "./routes/indexRouter.js";
+import categoryRouter from "./routes/categoryRouter.js"; 
 
 const port = process.env.PORT;
 const __filename = url.fileURLToPath(import.meta.url);
@@ -22,5 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use("/", indexRouter);
+app.use("/category", categoryRouter); 
 
 app.listen(port, () => console.log(`Server is running on port: ${port}`));

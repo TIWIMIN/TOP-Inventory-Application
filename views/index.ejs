@@ -9,7 +9,18 @@
     <h1>Packing List</h1>
     <h2>Categories:</h2>
     <ul>
-      <%= categories %>
+      <% categories.map((category) => { %>
+        <li><a href="/category/<%= category %>"><%= category %></a></li>
+        <form action="/deleteCategory" method="POST">
+          <input type="hidden" name="category" value="<%= category %>">
+          <button type="submit">Delete</button>
+        </form>
+      <%}) %>
     </ul>
+    <form action="/" method="POST">
+      <label for="category">New Category:</label>
+      <input type="text" id="category" name="category">
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
