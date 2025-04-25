@@ -40,12 +40,42 @@ const getCategoryID = async (category) => {
 const getAllItems = async (category_id) => {
   try {
     const result = await pool.query(
-      `SELECT name, quantity FROM items WHERE (category_id) = ($1)`,
+      `SELECT id, name, quantity FROM items WHERE (category_id) = ($1)`,
       [category_id]
     );
     return result.rows;
   } catch (error) {
     console.error("Error fetching item", error);
+  }
+};
+
+const deleteItem = async (item) => {
+  try {
+    await pool.query(`DELETE FROM items WHERE (name) = ($1)`, [item]);
+  } catch (error) {
+    console.error("Failed to delete item", error);
+  }
+};
+
+const incrementItem = async (item) => {
+  try {
+    await pool.query(
+      `UPDATE items SET quantity = quantity + 1 WHERE (name) = ($1)`,
+      [item]
+    );
+  } catch (error) {
+    console.error("Failed to increment item", error);
+  }
+};
+
+const decrementItem = async (item) => {
+  try {
+    await pool.query(
+      `UPDATE items SET quantity = GREATEST(quantity - 1, 0) WHERE (name) = ($1)`,
+      [item]
+    );
+  } catch (error) {
+    console.error("Failed to decrement item", error);
   }
 };
 
@@ -55,4 +85,7 @@ export {
   deleteCategory,
   getCategoryID,
   getAllItems,
+  deleteItem, 
+  incrementItem, 
+  decrementItem
 };

@@ -12,7 +12,21 @@
         <% items.map((item) => { %>
             <li>
                 <%= item.name %>, <%= item.quantity %>
-                
+                <form action="/category/<%= category %>/deleteItem" method="POST" style="display:inline">
+                    <input type="hidden" name="item" value="<%= item.name %>">
+                    <input type="hidden" name="category" value = "<%= category %>">
+                    <button type="submit">Delete</button>
+                </form>
+                <form action="/category/<%= category %>/decrementItem" method="POST" style="display:inline">
+                    <input type="hidden" name="item" value="<%= item.name %>">
+                    <input type="hidden" name="category" value = "<%= category %>">
+                    <button type="submit">-</button>
+                </form>
+                <form action="/category/<%= category %>/incrementItem" method="POST" style="display:inline">
+                    <input type="hidden" name="item" value="<%= item.name %>">
+                    <input type="hidden" name="category" value = "<%= category %>">
+                    <button type="submit">+</button>
+                </form>
             </li>
         <%}) %>
     </ul>
