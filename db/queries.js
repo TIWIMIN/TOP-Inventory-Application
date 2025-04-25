@@ -79,6 +79,17 @@ const decrementItem = async (item) => {
   }
 };
 
+const createItem = async (item, categoryID) => {
+  try {
+    await pool.query(
+      `INSERT into items (name, quantity, category_id) VALUES ($1, $2, $3)`, 
+      [item, 0, categoryID]
+    )
+  } catch (error) {
+    console.error("Failed to create item", error); 
+  }
+}
+
 export {
   getAllCategories,
   createNewCategory,
@@ -87,5 +98,6 @@ export {
   getAllItems,
   deleteItem, 
   incrementItem, 
-  decrementItem
+  decrementItem, 
+  createItem
 };

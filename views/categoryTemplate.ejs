@@ -29,6 +29,12 @@
                 </form>
             </li>
         <%}) %>
+        <form action="/category/<%= category %>/createItem" method="POST">
+            <label for="newItem">Create new item:</label>
+            <input id="newItem" type="text" name="item">
+            <input type="hidden" name="category" value="<%= category %>">
+            <button type="submit">Submit</button>
+        </form>
     </ul>
 </body>
 </html>

@@ -4,6 +4,7 @@ import {
   deleteItem,
   incrementItem,
   decrementItem,
+  createItem,
 } from "../db/queries.js";
 
 const createCategoryGet = async (req, res) => {
@@ -20,36 +21,54 @@ const createCategoryGet = async (req, res) => {
 };
 
 const deleteItemPOST = async (req, res) => {
-    try {
-        const { item } = req.body; 
-        const { category } = req.body; 
-        await deleteItem(item); 
-        res.redirect(`/category/${category}`)
-    } catch (error) {
-        console.error("Failed to POST delete item request", error)
-    }
+  try {
+    const { item } = req.body;
+    const { category } = req.body;
+    await deleteItem(item);
+    res.redirect(`/category/${category}`);
+  } catch (error) {
+    console.error("Failed to POST delete item request", error);
+  }
 };
 
 const incrementItemPOST = async (req, res) => {
-    try {
-        const { item } = req.body; 
-        const { category } = req.body; 
-        await incrementItem(item); 
-        res.redirect(`/category/${category}`)
-    } catch (error) {
-        console.error("Failed to POST item increment", error);
-    }
-}
+  try {
+    const { item } = req.body;
+    const { category } = req.body;
+    await incrementItem(item);
+    res.redirect(`/category/${category}`);
+  } catch (error) {
+    console.error("Failed to POST item increment", error);
+  }
+};
 
 const decrementItemPOST = async (req, res) => {
-    try {
-        const { item } = req.body; 
-        const { category } = req.body; 
-        await decrementItem(item); 
-        res.redirect(`/category/${category}`)
-    } catch (error) {
-        console.error("Failed to POST item decrement", error);
-    }
-}
+  try {
+    const { item } = req.body;
+    const { category } = req.body;
+    await decrementItem(item);
+    res.redirect(`/category/${category}`);
+  } catch (error) {
+    console.error("Failed to POST item decrement", error);
+  }
+};
 
-export { createCategoryGet, deleteItemPOST, incrementItemPOST, decrementItemPOST };
+const createItemPOST = async (req, res) => {
+  try {
+    const { item } = req.body;
+    const { category } = req.body;
+    const categoryID = await getCategoryID(category);
+    await createItem(item, categoryID);
+    res.redirect(`/category/${category}`);
+  } catch (error) {
+    console.error("Failed to POST item creation", error);
+  }
+};
+
+export {
+  createCategoryGet,
+  deleteItemPOST,
+  incrementItemPOST,
+  decrementItemPOST,
+  createItemPOST,
+};
